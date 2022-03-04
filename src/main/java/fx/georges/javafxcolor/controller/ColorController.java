@@ -39,11 +39,9 @@ public class ColorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        String currentPaneColor = currentColor.getHexValue();
-        paneBackground.setStyle("-fx-background-color:"+ currentPaneColor);
+        paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
 
-        hexValueField.setText(currentPaneColor);
-
+        hexValueField.setText(currentColor.getHexValue());
         redValueField.setText(String.valueOf(currentColor.getRed()));
         greenValueField.setText(String.valueOf(currentColor.getGreen()));
         blueValueField.setText(String.valueOf(currentColor.getBlue()));
@@ -55,123 +53,72 @@ public class ColorController implements Initializable {
 
     public void setColorsParameters(){
 
-        hexValueField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                String newHexavalue = hexValueField.getText();
+        hexValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            String newHexavalue = hexValueField.getText();
 
-                try{
-                    msgWrong.setText("");
-                    currentColor.setHexValue(newHexavalue);
-                    paneBackground.setStyle("-fx-background-color:"+ newHexavalue);
-                    currentColor.convertHexaInRGB(newHexavalue);
-                    redSlider.setValue(currentColor.getRed());
-                    greenSlider.setValue(currentColor.getGreen());
-                    blueSlider.setValue(currentColor.getBlue());
-
-                }catch (IllegalArgumentException e){
-                    msgWrong.setText(e.getMessage());
-                }
+            try{
+                msgWrong.setText("");
+                currentColor.setHexValue(newHexavalue);
+                paneBackground.setStyle("-fx-background-color:"+ newHexavalue);
+                currentColor.convertHexaInRGB(newHexavalue);
+                redSlider.setValue(currentColor.getRed());
+                greenSlider.setValue(currentColor.getGreen());
+                blueSlider.setValue(currentColor.getBlue());
+            }catch (IllegalArgumentException e){
+                msgWrong.setText(e.getMessage());
             }
         });
 
-        redSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                int newRedColor = (int) redSlider.getValue();
-                currentColor.setRed(newRedColor);
-                redValueField.setText(String.valueOf(newRedColor));
+        redSlider.valueProperty().addListener((observableValue, number, t1) -> {
+            int newRedColor = (int) redSlider.getValue();
+            currentColor.setRed(newRedColor);
+            redValueField.setText(String.valueOf(newRedColor));
 
-                String currentPaneColor = currentColor.getHexValue();
-                paneBackground.setStyle("-fx-background-color:"+ currentPaneColor);
-                hexValueField.setText(currentPaneColor);
-            }
+            paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
+            hexValueField.setText(currentColor.getHexValue());
         });
-        redValueField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                String s = redValueField.getText();
-                if(!s.matches("[a-zA-Z]+")){
-                    try{
-                        currentColor.setRed(Integer.parseInt(redValueField.getText()));
-                        redSlider.setValue(Double.parseDouble(s));
-                        msgWrong.setText("");
-                    }catch (IllegalArgumentException e){
-                        msgWrong.setText(e.getMessage());
-                    }
-                }else {
-                    msgWrong.setText("Merci de saisir un nombre");
-                }
-            }
+        redValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            validFormatColorFieldIsNumber(redValueField, redSlider);
         });
 
-        greenSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                int newGreenColor = (int) greenSlider.getValue();
-                currentColor.setGreen(newGreenColor);
-                greenValueField.setText(String.valueOf(newGreenColor));
+        greenSlider.valueProperty().addListener((observableValue, number, t1) -> {
+            int newGreenColor = (int) greenSlider.getValue();
+            currentColor.setGreen(newGreenColor);
+            greenValueField.setText(String.valueOf(newGreenColor));
 
-                String currentPaneColor = currentColor.getHexValue();
-                paneBackground.setStyle("-fx-background-color:"+ currentPaneColor);
-                hexValueField.setText(currentPaneColor);
-            }
+            paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
+            hexValueField.setText(currentColor.getHexValue());
         });
-        greenValueField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                String s = greenValueField.getText();
-                if(!s.matches("[a-zA-Z]+")){
-                    try{
-                        currentColor.setGreen(Integer.parseInt(greenValueField.getText()));
-                        greenSlider.setValue(Double.parseDouble(s));
-                        msgWrong.setText("");
-                    }catch (IllegalArgumentException e){
-                        msgWrong.setText(e.getMessage());
-                    }
-                }else {
-                    msgWrong.setText("Merci de saisir un nombre");
-                }
-            }
+        greenValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            validFormatColorFieldIsNumber(greenValueField, greenSlider);
         });
 
-        blueSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                int newBlueColor = (int) blueSlider.getValue();
-                currentColor.setBlue(newBlueColor);
-                blueValueField.setText(String.valueOf(newBlueColor));
+        blueSlider.valueProperty().addListener((observableValue, number, t1) -> {
+            int newBlueColor = (int) blueSlider.getValue();
+            currentColor.setBlue(newBlueColor);
+            blueValueField.setText(String.valueOf(newBlueColor));
 
-                String currentPaneColor = currentColor.getHexValue();
-                paneBackground.setStyle("-fx-background-color:"+ currentPaneColor);
-                hexValueField.setText(currentPaneColor);
-            }
+            paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
+            hexValueField.setText(currentColor.getHexValue());
         });
-        blueValueField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                String s = blueValueField.getText();
-                if(!s.matches("[a-zA-Z]+")){
-                    try{
-                        currentColor.setBlue(Integer.parseInt(blueValueField.getText()));
-                        blueSlider.setValue(Double.parseDouble(s));
-                        msgWrong.setText("");
-                    }catch (IllegalArgumentException e){
-                        msgWrong.setText(e.getMessage());
-                    }
-                }else {
-                    msgWrong.setText("Merci de saisir un nombre");
-                }
-            }
+        blueValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            validFormatColorFieldIsNumber(blueValueField, blueSlider);
         });
-
-
-
-
     }
 
-
-
-
+    private void validFormatColorFieldIsNumber(TextField fieldValue, Slider slider){
+        String s = fieldValue.getText();
+        if(!s.matches(("[a-zA-Z]+")) && !s.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$") ){
+            try{
+                msgWrong.setText("");
+                currentColor.setBlue(Integer.parseInt(s));
+                slider.setValue(Double.parseDouble(s));
+            }catch (IllegalArgumentException e){
+                msgWrong.setText(e.getMessage());
+            }
+        }else {
+            msgWrong.setText("Merci de saisir un nombre");
+        }
+    }
 
 }
