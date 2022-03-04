@@ -1,7 +1,5 @@
 package fx.georges.javafxcolor.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -10,10 +8,9 @@ import javafx.scene.control.*;
 import fx.georges.javafxcolor.model.Color;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import javax
 
 public class ColorController implements Initializable {
 
@@ -169,7 +166,8 @@ public class ColorController implements Initializable {
     public void onSave(){
         try {
             Image snapshot = drawingZone.snapshot(null, null);
-            ImageIO.write
+
+            //ImageIO.write
         }catch (Exception e){
             System.out.println(e.toString());
         }
