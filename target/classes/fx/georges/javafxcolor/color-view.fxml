@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -86,7 +88,7 @@
                         <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="257.0" prefWidth="296.0">
+                  <VBox prefHeight="400.0" prefWidth="304.0">
                      <children>
                         <Label text="Hexa Value" />
                         <TextField fx:id="hexValueField" />
@@ -107,8 +109,10 @@
       <Pane layoutX="-2.0" layoutY="279.0" prefHeight="700.0" prefWidth="700.0">
          <children>
             <MenuBar layoutY="-1.0" prefHeight="41.0" prefWidth="700.0" />
-            <TextField layoutX="25.0" layoutY="6.0" prefHeight="26.0" prefWidth="159.0" />
-            <CheckBox layoutX="207.0" layoutY="10.0" mnemonicParsing="false" text="Eraser" />
+            <TextField fx:id="brushSize" layoutX="25.0" layoutY="6.0" prefHeight="26.0" prefWidth="159.0" text="18" />
+            <CheckBox fx:id="eraser" layoutX="207.0" layoutY="10.0" mnemonicParsing="false" text="Eraser" />
+            <Canvas fx:id="drawingZone" height="649.0" layoutX="5.0" layoutY="45.0" width="698.0" />
+            <ColorPicker fx:id="colorPicker" layoutX="294.0" layoutY="5.0" />
          </children>
       </Pane>
    </children>

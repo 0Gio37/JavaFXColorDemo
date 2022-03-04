@@ -4,9 +4,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.*;
 import fx.georges.javafxcolor.model.Color;
 import javafx.scene.layout.Pane;
 
@@ -40,7 +40,13 @@ public class ColorController implements Initializable {
 
     //variable for drawing bottom pan
     @FXML
-    private Pane drawingZone;
+    private Canvas drawingZone;
+    @FXML
+    private TextField brushSize;
+    @FXML
+    private ColorPicker colorPicker;
+    @FXML
+    private CheckBox eraser;
 
 
 
@@ -48,7 +54,7 @@ public class ColorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
+        paneBackground.setStyle("-fx-background-color:" + currentColor.getHexValue());
 
         hexValueField.setText(currentColor.getHexValue());
         redValueField.setText(String.valueOf(currentColor.getRed()));
@@ -58,7 +64,23 @@ public class ColorController implements Initializable {
         redSlider.setValue(currentColor.getRed());
         greenSlider.setValue(currentColor.getGreen());
         blueSlider.setValue(currentColor.getBlue());
+
+
+        //drawing fonction
+        GraphicsContext gc = drawingZone.getGraphicsContext2D();
+        drawingZone.setOnMouseDragged(e -> {
+            double size = Double.parseDouble(brushSize.getText());
+            double x = e.getX() - size / 2;
+            double y = e.getY() - size / 2;
+        if(eraser.isSelected()){
+            gc.clearRect(x,y,size,size);
+        }else{
+            gc.setFill(colorPicker.getValue());
+            gc.fillRect(x, y, size, size);
+        }
+        });
     }
+
 
     /**
      * Methode called when mouse is on application screen
@@ -82,26 +104,26 @@ public class ColorController implements Initializable {
 
         //actions on red values
         redValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
-            changeFromFieldToSlider(redValueField, redSlider);
+            changeFromFieldToSlider(1, redValueField, redSlider);
         });
         redSlider.valueProperty().addListener((observableValue, number, t1) -> {
-            changeFromSliderToField(redSlider,redValueField );
+            changeFromSliderToField(1, redSlider,redValueField );
         });
 
         //actions on green values
         greenValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
-            changeFromFieldToSlider(greenValueField, greenSlider);
+            changeFromFieldToSlider(2, greenValueField, greenSlider);
         });
         greenSlider.valueProperty().addListener((observableValue, number, t1) -> {
-            changeFromSliderToField(greenSlider,greenValueField );
+            changeFromSliderToField(2, greenSlider,greenValueField );
         });
 
         //actions on blue values
         blueValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
-            changeFromFieldToSlider(blueValueField, blueSlider);
+            changeFromFieldToSlider(3, blueValueField, blueSlider);
         });
         blueSlider.valueProperty().addListener((observableValue, number, t1) -> {
-            changeFromSliderToField(blueSlider,blueValueField );
+            changeFromSliderToField(3, blueSlider,blueValueField );
         });
     }
 
@@ -110,9 +132,14 @@ public class ColorController implements Initializable {
      * @param slider type Slider object
      * @param fieldValue type TextField object
      */
-    private void changeFromSliderToField(Slider slider, TextField fieldValue){
+    private void changeFromSliderToField(int numberColor, Slider slider, TextField fieldValue){
         int newColor = (int) slider.getValue();
-        currentColor.setBlue(newColor);
+        switch (numberColor) {
+            case 1 -> currentColor.setRed(newColor);
+            case 2 -> currentColor.setGreen(newColor);
+            case 3 -> currentColor.setBlue(newColor);
+        }
+        //currentColor.setBlue(newColor);
         fieldValue.setText(String.valueOf(newColor));
         paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
         hexValueField.setText(currentColor.getHexValue());
@@ -122,12 +149,17 @@ public class ColorController implements Initializable {
      * @param fieldValue type TextField object
      * @param slider type Slider object
      */
-    private void changeFromFieldToSlider(TextField fieldValue, Slider slider){
+    private void changeFromFieldToSlider(int numberColor, TextField fieldValue, Slider slider){
         String s = fieldValue.getText();
         if(!s.matches(("[a-zA-Z]+")) && !s.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$") ){
             try{
                 msgWrong.setText("");
-                currentColor.setBlue(Integer.parseInt(s));
+                switch (numberColor) {
+                    case 1 -> currentColor.setRed(Integer.parseInt(s));
+                    case 2 -> currentColor.setGreen(Integer.parseInt(s));
+                    case 3 -> currentColor.setBlue(Integer.parseInt(s));
+                }
+                //currentColor.setBlue(Integer.parseInt(s));
                 slider.setValue(Double.parseDouble(s));
             }catch (IllegalArgumentException e){
                 msgWrong.setText(e.getMessage());
@@ -138,14 +170,27 @@ public class ColorController implements Initializable {
     }
 
 
-    /**
-     * Methode called when mouse is on application screen
-     */
-    public void drawFonction(){
+
+ /*   public void drawFonction(){
         String currentDrawingColor = currentColor.getHexValue();
 
+        GraphicsContext gc = drawingZone.getGraphicsContext2D();
 
-    }
+        drawingZone.setOnMouseDragged(e -> {
+            double size = Double.parseDouble(brushSize.getText());
+            double x = e.getX() - size / 2;
+            double y = e.getY() - size / 2;
+
+            gc.setFill(colorPicker.getValue());
+            gc.fillRect(x,y,size,size);
+        });
+        }
+*/
+
+
+
+
+
 
 
 
