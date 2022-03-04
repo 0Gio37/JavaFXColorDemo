@@ -8,12 +8,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane onMouseEntered="#setColorsParameters" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.georges.javafxcolor.controller.ColorController">
    <children>
       <VBox prefHeight="300.0" prefWidth="600.0">
          <children>
-            <Label fx:id="msgWrong" prefHeight="17.0" prefWidth="603.0" textFill="#da1414" />
+            <Label fx:id="msgWrong" alignment="CENTER" prefHeight="17.0" prefWidth="603.0" textAlignment="JUSTIFY" textFill="#da1414" textOverrun="CENTER_WORD_ELLIPSIS">
+               <font>
+                  <Font name="Arial Narrow Bold Italic" size="13.0" />
+               </font>
+            </Label>
             <HBox prefHeight="300.0" prefWidth="600.0">
                <children>
                   <VBox prefHeight="300.0" prefWidth="395.0">

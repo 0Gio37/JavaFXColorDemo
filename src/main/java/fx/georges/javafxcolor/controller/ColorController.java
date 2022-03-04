@@ -39,8 +39,6 @@ public class ColorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //final Color currentColor = new Color(100,200, 50);
-
         String currentPaneColor = currentColor.getHexValue();
         paneBackground.setStyle("-fx-background-color:"+ currentPaneColor);
 
@@ -56,6 +54,27 @@ public class ColorController implements Initializable {
     }
 
     public void setColorsParameters(){
+
+        hexValueField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                String newHexavalue = hexValueField.getText();
+
+                try{
+                    msgWrong.setText("");
+                    currentColor.setHexValue(newHexavalue);
+                    paneBackground.setStyle("-fx-background-color:"+ newHexavalue);
+                    currentColor.convertHexaInRGB(newHexavalue);
+                    redSlider.setValue(currentColor.getRed());
+                    greenSlider.setValue(currentColor.getGreen());
+                    blueSlider.setValue(currentColor.getBlue());
+
+                }catch (IllegalArgumentException e){
+                    msgWrong.setText(e.getMessage());
+                }
+            }
+        });
+
         redSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -102,7 +121,17 @@ public class ColorController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 String s = greenValueField.getText();
-                greenSlider.setValue(Double.parseDouble(s));
+                if(!s.matches("[a-zA-Z]+")){
+                    try{
+                        currentColor.setGreen(Integer.parseInt(greenValueField.getText()));
+                        greenSlider.setValue(Double.parseDouble(s));
+                        msgWrong.setText("");
+                    }catch (IllegalArgumentException e){
+                        msgWrong.setText(e.getMessage());
+                    }
+                }else {
+                    msgWrong.setText("Merci de saisir un nombre");
+                }
             }
         });
 
@@ -122,9 +151,22 @@ public class ColorController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 String s = blueValueField.getText();
-                blueSlider.setValue(Double.parseDouble(s));
+                if(!s.matches("[a-zA-Z]+")){
+                    try{
+                        currentColor.setBlue(Integer.parseInt(blueValueField.getText()));
+                        blueSlider.setValue(Double.parseDouble(s));
+                        msgWrong.setText("");
+                    }catch (IllegalArgumentException e){
+                        msgWrong.setText(e.getMessage());
+                    }
+                }else {
+                    msgWrong.setText("Merci de saisir un nombre");
+                }
             }
         });
+
+
+
 
     }
 
