@@ -14,6 +14,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ColorController implements Initializable {
+
+    final Color currentColor = new Color(100,200, 50);
+
+    //variable on change color top pan
     @FXML
     private TextField hexValueField;
     @FXML
@@ -33,7 +37,12 @@ public class ColorController implements Initializable {
     @FXML
     private Slider blueSlider;
 
-    final Color currentColor = new Color(100,200, 50);
+
+    //variable for drawing bottom pan
+    @FXML
+    private Pane drawingZone;
+
+
 
 
     @Override
@@ -51,11 +60,13 @@ public class ColorController implements Initializable {
         blueSlider.setValue(currentColor.getBlue());
     }
 
+    /**
+     * Methode called when mouse is on application screen
+     */
     public void setColorsParameters(){
-
+        //actions on hexa values
         hexValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             String newHexavalue = hexValueField.getText();
-
             try{
                 msgWrong.setText("");
                 currentColor.setHexValue(newHexavalue);
@@ -69,44 +80,49 @@ public class ColorController implements Initializable {
             }
         });
 
-        redSlider.valueProperty().addListener((observableValue, number, t1) -> {
-            int newRedColor = (int) redSlider.getValue();
-            currentColor.setRed(newRedColor);
-            redValueField.setText(String.valueOf(newRedColor));
-
-            paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
-            hexValueField.setText(currentColor.getHexValue());
-        });
+        //actions on red values
         redValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
-            validFormatColorFieldIsNumber(redValueField, redSlider);
+            changeFromFieldToSlider(redValueField, redSlider);
+        });
+        redSlider.valueProperty().addListener((observableValue, number, t1) -> {
+            changeFromSliderToField(redSlider,redValueField );
         });
 
-        greenSlider.valueProperty().addListener((observableValue, number, t1) -> {
-            int newGreenColor = (int) greenSlider.getValue();
-            currentColor.setGreen(newGreenColor);
-            greenValueField.setText(String.valueOf(newGreenColor));
-
-            paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
-            hexValueField.setText(currentColor.getHexValue());
-        });
+        //actions on green values
         greenValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
-            validFormatColorFieldIsNumber(greenValueField, greenSlider);
+            changeFromFieldToSlider(greenValueField, greenSlider);
+        });
+        greenSlider.valueProperty().addListener((observableValue, number, t1) -> {
+            changeFromSliderToField(greenSlider,greenValueField );
         });
 
-        blueSlider.valueProperty().addListener((observableValue, number, t1) -> {
-            int newBlueColor = (int) blueSlider.getValue();
-            currentColor.setBlue(newBlueColor);
-            blueValueField.setText(String.valueOf(newBlueColor));
-
-            paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
-            hexValueField.setText(currentColor.getHexValue());
-        });
+        //actions on blue values
         blueValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
-            validFormatColorFieldIsNumber(blueValueField, blueSlider);
+            changeFromFieldToSlider(blueValueField, blueSlider);
+        });
+        blueSlider.valueProperty().addListener((observableValue, number, t1) -> {
+            changeFromSliderToField(blueSlider,blueValueField );
         });
     }
 
-    private void validFormatColorFieldIsNumber(TextField fieldValue, Slider slider){
+    /**
+     * Change value of fields colors, update hexa field and pane background
+     * @param slider type Slider object
+     * @param fieldValue type TextField object
+     */
+    private void changeFromSliderToField(Slider slider, TextField fieldValue){
+        int newColor = (int) slider.getValue();
+        currentColor.setBlue(newColor);
+        fieldValue.setText(String.valueOf(newColor));
+        paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
+        hexValueField.setText(currentColor.getHexValue());
+    }
+    /**
+     * Change value of sliders colors, update hexa field and pane background
+     * @param fieldValue type TextField object
+     * @param slider type Slider object
+     */
+    private void changeFromFieldToSlider(TextField fieldValue, Slider slider){
         String s = fieldValue.getText();
         if(!s.matches(("[a-zA-Z]+")) && !s.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$") ){
             try{
@@ -120,5 +136,21 @@ public class ColorController implements Initializable {
             msgWrong.setText("Merci de saisir un nombre");
         }
     }
+
+
+    /**
+     * Methode called when mouse is on application screen
+     */
+    public void drawFonction(){
+        String currentDrawingColor = currentColor.getHexValue();
+
+
+    }
+
+
+
+
+
+
 
 }

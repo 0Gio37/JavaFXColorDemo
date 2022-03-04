@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,8 +16,18 @@
 
 <AnchorPane onMouseEntered="#setColorsParameters" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.georges.javafxcolor.controller.ColorController">
    <children>
-      <VBox prefHeight="300.0" prefWidth="600.0">
+      <VBox prefHeight="300.0" prefWidth="698.0">
          <children>
+            <MenuBar prefHeight="28.0" prefWidth="679.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Sauvegarder" />
+                        <MenuItem mnemonicParsing="false" text="Quitter" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
             <Label fx:id="msgWrong" alignment="CENTER" prefHeight="17.0" prefWidth="603.0" textAlignment="JUSTIFY" textFill="#da1414" textOverrun="CENTER_WORD_ELLIPSIS">
                <font>
                   <Font name="Arial Narrow Bold Italic" size="13.0" />
@@ -66,29 +80,36 @@
                         </HBox>
                      </children>
                      <padding>
-                        <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+                        <Insets bottom="30.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="400.0" prefWidth="252.0">
+                  <VBox prefHeight="257.0" prefWidth="296.0">
                      <children>
                         <Label text="Hexa Value" />
                         <TextField fx:id="hexValueField" />
-                        <Pane fx:id="paneBackground" prefHeight="154.0" prefWidth="169.0" style="-fx-background-color: green;">
+                        <Pane fx:id="paneBackground" prefHeight="128.0" prefWidth="169.0" style="-fx-background-color: green;">
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </Pane>
                      </children>
                      <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
                      </padding>
                   </VBox>
                </children>
             </HBox>
          </children>
       </VBox>
+      <Pane layoutX="-2.0" layoutY="279.0" prefHeight="700.0" prefWidth="700.0">
+         <children>
+            <MenuBar layoutY="-1.0" prefHeight="41.0" prefWidth="700.0" />
+            <TextField layoutX="25.0" layoutY="6.0" prefHeight="26.0" prefWidth="159.0" />
+            <CheckBox layoutX="207.0" layoutY="10.0" mnemonicParsing="false" text="Eraser" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
