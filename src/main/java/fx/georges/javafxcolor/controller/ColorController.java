@@ -8,14 +8,16 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import fx.georges.javafxcolor.model.Color;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ColorController implements Initializable {
 
-    final Color currentColor = new Color(100,200, 50);
+    final Color currentColor = new Color(20,20, 20);
 
     //variable on change color top pan
     @FXML
@@ -37,7 +39,6 @@ public class ColorController implements Initializable {
     @FXML
     private Slider blueSlider;
 
-
     //variable for drawing bottom pan
     @FXML
     private Canvas drawingZone;
@@ -47,8 +48,6 @@ public class ColorController implements Initializable {
     private ColorPicker colorPicker;
     @FXML
     private CheckBox eraser;
-
-
 
 
     @Override
@@ -65,8 +64,8 @@ public class ColorController implements Initializable {
         greenSlider.setValue(currentColor.getGreen());
         blueSlider.setValue(currentColor.getBlue());
 
-
         //drawing fonction
+        String s = currentColor.getHexValue();
         GraphicsContext gc = drawingZone.getGraphicsContext2D();
         drawingZone.setOnMouseDragged(e -> {
             double size = Double.parseDouble(brushSize.getText());
@@ -76,7 +75,7 @@ public class ColorController implements Initializable {
             gc.clearRect(x,y,size,size);
         }else{
             gc.setFill(colorPicker.getValue());
-            gc.fillRect(x, y, size, size);
+            gc.fillOval(x, y, size, size);
         }
         });
     }
@@ -139,7 +138,6 @@ public class ColorController implements Initializable {
             case 2 -> currentColor.setGreen(newColor);
             case 3 -> currentColor.setBlue(newColor);
         }
-        //currentColor.setBlue(newColor);
         fieldValue.setText(String.valueOf(newColor));
         paneBackground.setStyle("-fx-background-color:"+ currentColor.getHexValue());
         hexValueField.setText(currentColor.getHexValue());
@@ -151,7 +149,7 @@ public class ColorController implements Initializable {
      */
     private void changeFromFieldToSlider(int numberColor, TextField fieldValue, Slider slider){
         String s = fieldValue.getText();
-        if(!s.matches(("[a-zA-Z]+")) && !s.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$") ){
+        if(!s.matches(("[a-zA-Z]+")) && !s.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$")){
             try{
                 msgWrong.setText("");
                 switch (numberColor) {
@@ -159,7 +157,6 @@ public class ColorController implements Initializable {
                     case 2 -> currentColor.setGreen(Integer.parseInt(s));
                     case 3 -> currentColor.setBlue(Integer.parseInt(s));
                 }
-                //currentColor.setBlue(Integer.parseInt(s));
                 slider.setValue(Double.parseDouble(s));
             }catch (IllegalArgumentException e){
                 msgWrong.setText(e.getMessage());
@@ -169,33 +166,14 @@ public class ColorController implements Initializable {
         }
     }
 
-
-
- /*   public void drawFonction(){
-        String currentDrawingColor = currentColor.getHexValue();
-
-        GraphicsContext gc = drawingZone.getGraphicsContext2D();
-
-        drawingZone.setOnMouseDragged(e -> {
-            double size = Double.parseDouble(brushSize.getText());
-            double x = e.getX() - size / 2;
-            double y = e.getY() - size / 2;
-
-            gc.setFill(colorPicker.getValue());
-            gc.fillRect(x,y,size,size);
-        });
+    public void onSave(){
+        try {
+            Image snapshot = drawingZone.snapshot(null, null);
+            ImageIO.write
+        }catch (Exception e){
+            System.out.println(e.toString());
         }
-*/
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 }
