@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javax
+
 
 public class ColorController implements Initializable {
 
