@@ -16,7 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseEntered="#setColorsParameters" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.georges.javafxcolor.controller.ColorController">
+<AnchorPane onMouseEntered="#setColorsParameters" prefHeight="250.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fx.georges.javafxcolor.controller.ColorController">
    <children>
       <VBox prefHeight="300.0" prefWidth="698.0">
          <children>
