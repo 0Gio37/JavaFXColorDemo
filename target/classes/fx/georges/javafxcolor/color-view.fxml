@@ -26,8 +26,8 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Sauvegarder" />
-                        <MenuItem mnemonicParsing="false" text="Quitter" />
+                     <MenuItem mnemonicParsing="false" text="Sauvegarder" onAction="#onClickSave"/>
+                     <MenuItem mnemonicParsing="false" text="Quitter" onAction="#onClickExit"/>
                   </items>
                 </Menu>
               </menus>
@@ -41,7 +41,7 @@
                <children>
                   <VBox prefHeight="300.0" prefWidth="395.0">
                      <children>
-                        <Label text="Red" />
+                        <Label text="Niveau de rouge" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Slider fx:id="redSlider" max="255.0" prefWidth="250.0">
@@ -56,7 +56,7 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <Label text="Green" />
+                        <Label text="Niveau de vert" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Slider fx:id="greenSlider" max="255.0" prefHeight="16.0" prefWidth="250.0">
@@ -71,7 +71,7 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <Label text="Blue" />
+                        <Label text="Niveau de bleu" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Slider fx:id="blueSlider" max="255.0" prefWidth="250.0" />
@@ -92,7 +92,7 @@
                   </VBox>
                   <VBox prefHeight="400.0" prefWidth="304.0">
                      <children>
-                        <Label text="Hexa Value" />
+                        <Label text="Valeur Hexa" />
                         <TextField fx:id="hexValueField" />
                         <Pane fx:id="paneBackground" prefHeight="128.0" prefWidth="169.0" style="-fx-background-color: green;">
                            <VBox.margin>
@@ -112,9 +112,8 @@
          <children>
             <MenuBar layoutY="-1.0" prefHeight="41.0" prefWidth="700.0" />
             <TextField fx:id="brushSize" layoutX="25.0" layoutY="6.0" prefHeight="26.0" prefWidth="159.0" text="18" />
-            <CheckBox fx:id="eraser" layoutX="207.0" layoutY="10.0" mnemonicParsing="false" text="Eraser" />
-            <Canvas fx:id="drawingZone" height="649.0" layoutX="5.0" layoutY="45.0" width="698.0" />
-            <ColorPicker fx:id="colorPicker" layoutX="294.0" layoutY="5.0" />
+            <CheckBox fx:id="eraser" layoutX="207.0" layoutY="10.0" mnemonicParsing="false" text="Gomme" />
+            <Canvas fx:id="canvas" height="649.0" layoutX="5.0" layoutY="45.0" width="698.0" />
          </children>
       </Pane>
    </children>

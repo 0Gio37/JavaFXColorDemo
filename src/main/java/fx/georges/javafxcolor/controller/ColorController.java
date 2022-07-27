@@ -1,19 +1,29 @@
 package fx.georges.javafxcolor.controller;
 
+import fx.georges.javafxcolor.model.Color;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.*;
-import fx.georges.javafxcolor.model.Color;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.application.Platform;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javax.imageio.ImageIO;
 
 
-public class ColorController implements Initializable {
+public class ColorController implements Initializable{
 
+    public Platform platform;
     final Color currentColor = new Color(20,20, 20);
 
     //variable on change color top pan
@@ -38,11 +48,9 @@ public class ColorController implements Initializable {
 
     //variable for drawing bottom pan
     @FXML
-    private Canvas drawingZone;
+    private Canvas canvas;
     @FXML
     private TextField brushSize;
-    @FXML
-    private ColorPicker colorPicker;
     @FXML
     private CheckBox eraser;
 
@@ -63,20 +71,22 @@ public class ColorController implements Initializable {
 
         //drawing fonction
         String s = currentColor.getHexValue();
-        GraphicsContext gc = drawingZone.getGraphicsContext2D();
-        drawingZone.setOnMouseDragged(e -> {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        canvas.setOnMouseDragged(e -> {
             double size = Double.parseDouble(brushSize.getText());
             double x = e.getX() - size / 2;
             double y = e.getY() - size / 2;
         if(eraser.isSelected()){
             gc.clearRect(x,y,size,size);
         }else{
-            gc.setFill(colorPicker.getValue());
+            //arguments object Color = type double and range between 0 and 1 : (0=0, 1=255)
+            javafx.scene.paint.Color drawingColor = new javafx.scene.paint.Color(((double)currentColor.getRed())/255, ((double) currentColor.getGreen())/255, ((double) currentColor.getBlue())/255, 1);
+            gc.setFill(drawingColor);
+            //System.out.println("mycolor :"+ drawingColor);
             gc.fillOval(x, y, size, size);
         }
         });
     }
-
 
     /**
      * Methode called when mouse is on application screen
@@ -163,14 +173,17 @@ public class ColorController implements Initializable {
         }
     }
 
-    public void onSave(){
+    public void onClickSave(){
         try {
-            Image snapshot = drawingZone.snapshot(null, null);
-
-            //ImageIO.write
+            Image snapshot = canvas.snapshot(null, null);
+            ImageIO.write(SwingFXUtils.fromFXImage(snapshot,null), "png", new File("paint.png"));
         }catch (Exception e){
-            System.out.println(e.toString());
+            System.out.println("failed to save"+e.toString());
         }
+    }
+
+    public void onClickExit(){
+        platform.exit();
     }
 
 

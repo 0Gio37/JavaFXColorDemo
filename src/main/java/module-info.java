@@ -9,6 +9,8 @@ module fx.georges.javafxcolor {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.desktop;
+    requires javafx.swing;
 
     opens fx.georges.javafxcolor to javafx.fxml;
     exports fx.georges.javafxcolor;

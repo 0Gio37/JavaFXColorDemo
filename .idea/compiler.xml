@@ -13,4 +13,9 @@
       <module name="JavaFXColorDemo" target="17" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="JavaFXColorDemo" options="--add-exports javafx.controls/javafx=fx.georges.javafxcolor" />
+    </option>
+  </component>
 </project>

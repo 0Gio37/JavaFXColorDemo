@@ -1,0 +1,40 @@
+<component name="libraryTable">
+  <library name="javafx-swing-18.0.2">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-swing-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-swing-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-swing-18.0.2-linux.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-swing-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-swing-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" />
+    </NATIVE>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-swing-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-swing-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" />
+    </SOURCES>
+    <jarDirectory url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" recursive="false" />
+    <jarDirectory url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-base-18.0.2.jar!/" recursive="false" type="SOURCES" />
+    <jarDirectory url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-graphics-18.0.2.jar!/" recursive="false" type="SOURCES" />
+    <jarDirectory url="jar://$PROJECT_DIR$/../../TPs/TP 13 - Java Color FX/jar_files/javafx-swing-18.0.2.jar!/" recursive="false" type="SOURCES" />
+  </library>
+</component>
