@@ -3,22 +3,27 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseEntered="#setColorsParameters" prefHeight="250.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fx.georges.javafxcolor.controller.ColorController">
+<AnchorPane onMouseEntered="#setColorsParameters" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.georges.javafxcolor.controller.ColorController">
    <children>
       <VBox prefHeight="300.0" prefWidth="698.0">
          <children>
@@ -26,8 +31,8 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                     <MenuItem mnemonicParsing="false" text="Sauvegarder" onAction="#onClickSave"/>
-                     <MenuItem mnemonicParsing="false" text="Quitter" onAction="#onClickExit"/>
+                     <MenuItem mnemonicParsing="false" onAction="#onClickSave" text="Sauvegarder" />
+                     <MenuItem mnemonicParsing="false" onAction="#onClickExit" text="Quitter" />
                   </items>
                 </Menu>
               </menus>
@@ -37,7 +42,7 @@
                   <Font name="Arial Narrow Bold Italic" size="13.0" />
                </font>
             </Label>
-            <HBox prefHeight="300.0" prefWidth="600.0">
+            <HBox prefHeight="300.0" prefWidth="698.0">
                <children>
                   <VBox prefHeight="300.0" prefWidth="395.0">
                      <children>
@@ -108,13 +113,57 @@
             </HBox>
          </children>
       </VBox>
-      <Pane layoutX="-2.0" layoutY="279.0" prefHeight="700.0" prefWidth="700.0">
+      <Pane layoutX="-2.0" layoutY="343.0" prefHeight="700.0" prefWidth="700.0">
          <children>
-            <MenuBar layoutY="-1.0" prefHeight="41.0" prefWidth="700.0" />
-            <TextField fx:id="brushSize" layoutX="25.0" layoutY="6.0" prefHeight="26.0" prefWidth="159.0" text="18" />
-            <CheckBox fx:id="eraser" layoutX="207.0" layoutY="10.0" mnemonicParsing="false" text="Gomme" />
-            <Canvas fx:id="canvas" height="649.0" layoutX="5.0" layoutY="45.0" width="698.0" />
+            <Canvas fx:id="canvas" height="700.0" layoutX="5.0" layoutY="-6.0" width="698.0" />
          </children>
       </Pane>
+      <Separator layoutY="299.0" prefHeight="7.0" prefWidth="698.0" />
+      <CheckBox fx:id="eraser" layoutX="588.0" layoutY="312.0" mnemonicParsing="false" text="Gomme" />
+      <Circle layoutX="31.0" layoutY="321.0" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="16.0" layoutX="142.0" layoutY="313.0" stroke="BLACK" strokeType="INSIDE" width="16.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <TextField fx:id="brushSize" editable="false" layoutX="475.0" layoutY="308.0" prefHeight="26.0" prefWidth="38.0" />
+      <RadioButton fx:id="radioFormSquare" layoutX="44.0" layoutY="312.0" mnemonicParsing="false" text="Carré" textOverrun="CENTER_ELLIPSIS" toggleGroup="$changeSize">
+         <toggleGroup>
+            <ToggleGroup fx:id="changeSize" />
+         </toggleGroup>
+      </RadioButton>
+      <Slider fx:id="sliderdraw" layoutX="301.0" layoutY="315.0" max="50.0" min="5.0" prefHeight="16.0" prefWidth="164.0" value="5.0" />
+      <Separator layoutY="337.0" prefHeight="7.0" prefWidth="698.0" />
+      <RadioButton fx:id="radioFormRound" layoutX="165.0" layoutY="312.0" mnemonicParsing="false" selected="true" text="rond" toggleGroup="$changeSize" />
    </children>
 </AnchorPane>

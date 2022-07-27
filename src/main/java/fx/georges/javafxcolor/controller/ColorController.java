@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.embed.swing.SwingFXUtils;
@@ -24,7 +21,7 @@ import javax.imageio.ImageIO;
 public class ColorController implements Initializable{
 
     public Platform platform;
-    final Color currentColor = new Color(20,20, 20);
+    final Color currentColor = new Color(50,100, 200);
 
     //variable on change color top pan
     @FXML
@@ -46,13 +43,19 @@ public class ColorController implements Initializable{
     @FXML
     private Slider blueSlider;
 
-    //variable for drawing bottom pan
+    //variable for drawing in canvas
     @FXML
     private Canvas canvas;
     @FXML
     private TextField brushSize;
     @FXML
     private CheckBox eraser;
+    @FXML
+    private Slider sliderdraw;
+    @FXML
+    private RadioButton radioFormSquare;
+    @FXML
+    private RadioButton radioFormRound;
 
 
     @Override
@@ -71,20 +74,31 @@ public class ColorController implements Initializable{
 
         //drawing fonction
         String s = currentColor.getHexValue();
+
+        brushSize.setText(String.valueOf(5));
+        int currentChangeSize = (int) sliderdraw.getValue();
+        sliderdraw.valueProperty().addListener((observableValue, number, t1) -> {
+            changeFromSliderToField(currentChangeSize, sliderdraw,brushSize );
+        });
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
         canvas.setOnMouseDragged(e -> {
             double size = Double.parseDouble(brushSize.getText());
             double x = e.getX() - size / 2;
             double y = e.getY() - size / 2;
-        if(eraser.isSelected()){
-            gc.clearRect(x,y,size,size);
-        }else{
+
             //arguments object Color = type double and range between 0 and 1 : (0=0, 1=255)
-            javafx.scene.paint.Color drawingColor = new javafx.scene.paint.Color(((double)currentColor.getRed())/255, ((double) currentColor.getGreen())/255, ((double) currentColor.getBlue())/255, 1);
-            gc.setFill(drawingColor);
-            //System.out.println("mycolor :"+ drawingColor);
-            gc.fillOval(x, y, size, size);
-        }
+            javafx.scene.paint.Color drawingColor = new javafx.scene.paint.Color(((double) currentColor.getRed()) / 255, ((double) currentColor.getGreen()) / 255, ((double) currentColor.getBlue()) / 255, 1);
+
+            if (eraser.isSelected()) {
+                gc.clearRect(x, y, size, size);
+            } else if (radioFormRound.isSelected()) {
+                gc.setFill(drawingColor);
+                gc.fillOval(x, y, size, size);
+            } else if (radioFormSquare.isSelected()) {
+                gc.setFill(drawingColor);
+                gc.fillRect(x, y, size, size);
+            };
         });
     }
 
