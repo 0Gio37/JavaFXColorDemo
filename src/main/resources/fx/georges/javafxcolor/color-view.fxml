@@ -98,7 +98,7 @@
                   <VBox prefHeight="400.0" prefWidth="304.0">
                      <children>
                         <Label text="Valeur Hexa" />
-                        <TextField fx:id="hexValueField" />
+                        <TextField fx:id="hexValueField" onMouseClicked="#eraseWrongMessage" />
                         <Pane fx:id="paneBackground" prefHeight="128.0" prefWidth="169.0" style="-fx-background-color: green;">
                            <VBox.margin>
                               <Insets top="10.0" />

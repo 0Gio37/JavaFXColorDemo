@@ -93,7 +93,7 @@ public class Color {
         p = Pattern.compile("^#[0-9A-F]{6}");
         m = p.matcher(hexaValue);
         if(!m.matches()){
-            throw new IllegalArgumentException("le format hexa n'est pas le bon");
+            throw new IllegalArgumentException("Ce n'est pas un format hexadecimal correct");
         }
         return true;
     }
@@ -135,7 +135,7 @@ public class Color {
     }
     public void setHexValue(String newValue){
         if(newValue == null){
-            throw new IllegalArgumentException("le format hexa n'est pas le bon");
+            throw new IllegalArgumentException("Ce n'est pas un format hexadecimal correct");
         }else if (validFormatHexaValue(newValue)) {
             this.hexa = newValue;
             convertHexaInRGB(newValue);

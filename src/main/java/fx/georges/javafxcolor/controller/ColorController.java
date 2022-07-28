@@ -73,12 +73,9 @@ public class ColorController implements Initializable{
         blueSlider.setValue(currentColor.getBlue());
 
         //drawing fonction
-        String s = currentColor.getHexValue();
-
         brushSize.setText(String.valueOf(5));
-        int currentChangeSize = (int) sliderdraw.getValue();
-        sliderdraw.valueProperty().addListener((observableValue, number, t1) -> {
-            changeFromSliderToField(currentChangeSize, sliderdraw,brushSize );
+          sliderdraw.valueProperty().addListener((observableValue, number, t1) -> {
+              brushSize.setText(String.valueOf( (int) sliderdraw.getValue()));
         });
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -110,7 +107,6 @@ public class ColorController implements Initializable{
         hexValueField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             String newHexavalue = hexValueField.getText();
             try{
-                msgWrong.setText("");
                 currentColor.setHexValue(newHexavalue);
                 paneBackground.setStyle("-fx-background-color:"+ newHexavalue);
                 currentColor.convertHexaInRGB(newHexavalue);
@@ -170,21 +166,12 @@ public class ColorController implements Initializable{
      */
     private void changeFromFieldToSlider(int numberColor, TextField fieldValue, Slider slider){
         String s = fieldValue.getText();
-        if(!s.matches(("[a-zA-Z]+")) && !s.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$")){
-            try{
-                msgWrong.setText("");
-                switch (numberColor) {
-                    case 1 -> currentColor.setRed(Integer.parseInt(s));
-                    case 2 -> currentColor.setGreen(Integer.parseInt(s));
-                    case 3 -> currentColor.setBlue(Integer.parseInt(s));
-                }
-                slider.setValue(Double.parseDouble(s));
-            }catch (IllegalArgumentException e){
-                msgWrong.setText(e.getMessage());
-            }
-        }else {
-            msgWrong.setText("Merci de saisir un nombre");
+        switch (numberColor) {
+            case 1 -> currentColor.setRed(Integer.parseInt(s));
+            case 2 -> currentColor.setGreen(Integer.parseInt(s));
+            case 3 -> currentColor.setBlue(Integer.parseInt(s));
         }
+        slider.setValue(Double.parseDouble(s));
     }
 
     public void onClickSave(){
@@ -198,6 +185,10 @@ public class ColorController implements Initializable{
 
     public void onClickExit(){
         platform.exit();
+    }
+
+    public void eraseWrongMessage(){
+        msgWrong.setText("");
     }
 
 
